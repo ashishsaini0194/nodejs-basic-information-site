@@ -2,20 +2,20 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
-app.use(express.static("public/"));
+const path1 = path.join(__dirname, "public/")
 
 app.get("", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/index.html"));
+  res.sendFile("index1.html", { root: path1 });
 });
 app.get("/about", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/about.html"));
+  res.sendFile("about.html", { root: path1 });
 });
 app.get("/contact-me", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/contact-me.html"));
+  res.sendFile("contact-me.html", { root: path1 });
 });
 app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "public/404.html"));
+  res.sendFile("404.html"), { root: path1 };
 });
-app.listen(process.env.PORT || 8080, () => {
-  console.log("Running!");
+var PORT = app.listen(process.env.PORT || 8080, () => {
+  console.log("Running on PORT : ", PORT.address().port);
 });
